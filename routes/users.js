@@ -12,16 +12,16 @@ router.get('/', function(req, res, next) {
  
   var skillDataArr = new Array();
  // var stream = fs.createReadStream("Skills_Tarun.csv");
- var stream = fs.createReadStream('RosterEmployees.csv');
-  csv
+ var stream = fs.createReadStream('PeopleSkills.csv');
+csv
   .fromStream(stream, {headers : true})
   .on("data", function(data){
       skillDataArr.push(data);
   })
-  .on("end", function(){
+  .on("end", function() {
       //console.log(skillDataArr.length);
       module.exports.saveData(skillDataArr);
-      console.log("done");
+      //console.log("done");
   });
 
   console.log('Before send..');
@@ -31,9 +31,9 @@ router.get('/', function(req, res, next) {
     console.log('inside callback function');
     
     var items = skillDataArr.filter(function(item){
-      console.log('Printing items skills data --->'+item.StandardJob)
-      var flag = item.StandardJob.includes(queryParam1);
-      console.log('Match status --->'+flag)
+     // console.log('Printing items skills data --->'+item.Skill)
+      var flag = item.Skill.includes(queryParam1);
+     // console.log('Match status --->'+flag)
       return flag;
     });
 
